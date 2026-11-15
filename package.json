@@ -53,7 +53,8 @@
     "LICENSE"
   ],
   "scripts": {
-    "smoke": "node scripts/smoke.mjs"
+    "smoke": "node scripts/smoke.mjs",
+    "tokens": "node scripts/gen-token-whitelist.mjs"
   },
   "license": "MIT"
 }

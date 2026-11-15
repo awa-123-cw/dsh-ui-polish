@@ -132,10 +132,14 @@ node scripts/smoke.mjs      # ALL CHECKS PASSED
 撤销路径与 effect 清理。CI（`.github/workflows/check.yml`）在每次 push 时跑同一套。
 
 白名单来自 DSH 0.2.2-rc.3 的 `@deepseek-ai/dsh-client-ui-theme/src/styles/*.css`（450 个 token）。
-上游升级后重新生成即可：
+上游升级后两条命令重新生成（自带 asar 抽取器，无需第三方工具）：
 
 ```bash
-# 从 DSH 安装目录的 app.asar 里取 styles/*.css，抽出全部 "--dsw-*:" 声明
+# 1) 从 DSH 的 app.asar 里抽出上游主题样式
+node scripts/asar-peek.mjs "D:\dsh des\resources\app.asar" extract ./tmp "dsh-client-ui-theme/src/styles"
+
+# 2) 生成白名单
+node scripts/gen-token-whitelist.mjs ./tmp/dsh/node_modules/@deepseek-ai/dsh-client-ui-theme/src/styles
 ```
 
 ## 目录结构
@@ -150,8 +154,11 @@ dsh-ui-polish/
 ├── locale/{zh,en}.json    # 插件列表里的标题/描述/详情入口
 ├── docs/DETAIL.md         # 插件详情页文档
 ├── icon.svg               # 插件图标（自制）
-├── references/dsh-tokens.txt
-└── scripts/smoke.mjs
+├── references/dsh-tokens.txt       # 上游 token 白名单（smoke 用）
+└── scripts/
+    ├── smoke.mjs                   # 自测（假 DOM 真跑浏览器半）
+    ├── asar-peek.mjs               # 读 app.asar：列路径 / 抽文件
+    └── gen-token-whitelist.mjs     # 重新生成 token 白名单
 ```
 
 ## License

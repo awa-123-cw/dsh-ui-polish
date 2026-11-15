@@ -1,7 +1,7 @@
 # DeepSeek Harness 主题 token 白名单（--dsw-*）
-# 来源：@deepseek-ai/dsh-client-ui-theme/src/styles/*.css（DSH 0.2.2-rc.3 桌面端）
+# 来源：9 个上游样式文件（base.css, brand-font.css, corner-shape.css, design-platform.css, focus.css, gradient-shadow-text.css, onboarding.css, scrollbar.css, shiki.css）
 # 用途：scripts/smoke.mjs 校验插件样式里 var(--dsw-*) 引用的名字确实存在于上游。
-# 生成时间：2026-11-15T16:52:39.7322373+08:00  共 450 个
+# 生成时间：2026-11-15T08:54:51.921Z  共 450 个
 
 --dsw-alias-bg-base
 --dsw-alias-bg-document-preview
