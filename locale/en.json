@@ -1,0 +1,7 @@
+{
+  "meta": {
+    "title": "UI polish",
+    "description": "Borderless micro-contrast layers, dark-mode weight compensation, dual-ring focus, tabular numerals, spring motion and streaming ink for the desktop Web UI.",
+    "detail": "docs/DETAIL.md"
+  }
+}

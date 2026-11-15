@@ -1,0 +1,42 @@
+name: check
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: 语法检查（浏览器半 / 宿主半 / 自测脚本）
+        run: |
+          node --check lib/client.js
+          node --check lib/index.js
+          node --check scripts/smoke.mjs
+
+      - name: 冒烟测试（假 DOM 真跑一遍浏览器半）
+        run: node scripts/smoke.mjs
+
+      - name: 清单与元数据校验
+        run: |
+          node -e "const p=require('./package.json');
+            const must=['name','version','dsh','exports','files','license'];
+            for (const k of must) if (!(k in p)) { console.error('missing '+k); process.exit(1) }
+            if (p.name!=='dsh-ui-polish') { console.error('name mismatch'); process.exit(1) }
+            if (!p.dsh.bundle||!p.dsh.bundle.patch) { console.error('no dsh.bundle.patch'); process.exit(1) }
+            if (!p.dsh.client||p.dsh.client.platform!=='web') { console.error('no dsh.client.platform=web'); process.exit(1) }
+            for (const f of p.files) { if (!require('fs').existsSync(f)) { console.error('missing file: '+f); process.exit(1) } }
+            console.log('package.json ok');"
+
+      - name: 本地化与详情文档存在且可解析
+        run: |
+          node -e "for (const f of ['locale/en.json','locale/zh.json']) { const j=JSON.parse(require('fs').readFileSync(f,'utf8')); if(!j.meta||!j.meta.title||!j.meta.description){console.error(f+' missing meta');process.exit(1)} } console.log('locale ok')"
+          test -f docs/DETAIL.md

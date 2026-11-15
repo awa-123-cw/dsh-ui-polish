@@ -1,0 +1,59 @@
+{
+  "name": "dsh-ui-polish",
+  "version": "1.2.1",
+  "type": "module",
+  "description": "DeepSeek Harness 桌面端界面质感精修：去边框微分层、暗色字重补偿、双环聚焦、等宽数字、弹性动效、流式水墨（含思考输出）",
+  "keywords": [
+    "deepseek-harness",
+    "dsh",
+    "dsh-plugin",
+    "dsh-bundle",
+    "cordis",
+    "ui",
+    "theme",
+    "css"
+  ],
+  "homepage": "https://github.com/awa-123-cw/dsh-ui-polish#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/awa-123-cw/dsh-ui-polish.git"
+  },
+  "bugs": {
+    "url": "https://github.com/awa-123-cw/dsh-ui-polish/issues"
+  },
+  "author": "awa-123-cw",
+  "main": "./lib/index.js",
+  "exports": {
+    ".": "./lib/index.js",
+    "./client": "./lib/client.js",
+    "./cordis.patch.yml": "./cordis.patch.yml",
+    "./locale/*.json": "./locale/*.json",
+    "./icon": "./icon.svg",
+    "./package.json": "./package.json"
+  },
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "platform": "web",
+      "immediately": true
+    }
+  },
+  "files": [
+    "lib/index.js",
+    "lib/client.js",
+    "cordis.patch.yml",
+    "locale/en.json",
+    "locale/zh.json",
+    "docs/DETAIL.md",
+    "icon.svg",
+    "README.md",
+    "CHANGELOG.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "smoke": "node scripts/smoke.mjs"
+  },
+  "license": "MIT"
+}

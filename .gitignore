@@ -1,0 +1,19 @@
+# 依赖与构建产物（本插件无依赖，仅防御性忽略）
+node_modules/
+package-lock.json
+pnpm-lock.yaml
+pnpm-workspace.yaml
+
+# 运行时与调试产物
+*.log
+logs/
+.out/
+.tmp/
+coverage/
+
+# 编辑器 / 系统
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+desktop.ini

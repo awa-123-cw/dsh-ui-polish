@@ -1,0 +1,7 @@
+# dsh-ui-polish bundle patch：向 Web 组合挂载界面质感层。
+# host half：无副作用（本插件不用宿主能力，只在浏览器侧改样式与主题 token）。
+# client half：注入质感样式表 + 通过 theme.overrideTokens 覆盖颜色 token，
+#              并在「设置 → 通用」提供一行开关（id: ui-polish）。
+- insert:
+    - id: dsh-ui-polish
+      name: dsh-ui-polish
